@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,17 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  public carros;
 
-  }
+  constructor(public navCtrl: NavController,
+              private _http: HttpClient){
+      this. _http.get('https://jsonplaceholder.typicode.com/comments')
+      .subscribe(
+        (carros) => {
+          this.carros = carros;
+        }
+      );
+
+      }
 
 }
